@@ -10,8 +10,13 @@
 - [百度百科](http://baike.baidu.com/subview/283786/283786.htm)
 - [%~dp0](http://blog.csdn.net/lightyearwp/article/details/2778677)
 - [cmd](http://www.jb51.net/article/11287.htm)
+- http://www.cnblogs.com/yexiaochai/p/3961291.html
+- https://segmentfault.com/a/1190000006814420#articleHeader6
+- https://juejin.im/entry/57cfc4f567f3560057bafb8b
+
+
 ## 总结
-- node liz 可以执行 而跟有没有#!/usr/bin/env node 没有关系  liz 无后缀名  难道#!/usr/bin/env node 只是给人看的
+- node liz 可以执行 而跟有没有#!/usr/bin/env node 没有关系  liz 无后缀名  难道#!/usr/bin/env node 只是给人看的 可能全局命令的时候自己根据 env 选择解析程序吧
 - 对比系统的环境变量和npm 软链接的位置，感慨万千
 - **npm link npm unlink**
 ```bash
@@ -19,6 +24,7 @@
   "%~dp0\node.exe"  "%~dp0\node_modules\markdown2html\bin\template.js" %*
 ) ELSE (
   @SETLOCAL
+  ：： 
   @SET PATHEXT=%PATHEXT:;.JS;=;% ：：.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC  每个后缀名的执行顺序 run cmd  === run cmd.exe ping.exe ........
   node  "%~dp0\node_modules\markdown2html\bin\template.js" %*
 )
@@ -36,6 +42,10 @@
        %Path%         ===    %SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem  (原本的设置)
        %HOMEDRIVE%    ===    C:   (系统盘)
        %HOMEPATH%     ===    \Documents and Settings\Administrator
+
+       
+C:\Users\Zhuo.Li>echo %PATHEXT%
+.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 ```
 ## TODO
 -[ ] 总结NPM命令开发的软链接 对应的目录结构执行脚本（结合图片）
@@ -44,3 +54,8 @@
 指令&数据 
 
 延迟&带宽
+
+
+## gif
+
+![](pic/acfun.gif)
