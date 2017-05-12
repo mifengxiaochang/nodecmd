@@ -1,0 +1,14 @@
+{
+  "name": "eslint-demo",
+  "version": "1.0.0",
+  "description": "a demo for eslint",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "liz",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^3.19.0"
+  }
+}
