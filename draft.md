@@ -75,6 +75,40 @@ Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工
 
 ![](pic/node-run.gif)
 
+### package.json
+```
+{
+  "name": "eslint-demo",
+  "version": "1.0.0",
+  "description": "a demo for eslint",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "liz",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^3.19.0"
+  }
+}
+```
+### index.js
+```
+"use strict";
+var CLIEngine = require("eslint").CLIEngine;
 
+var cli = new CLIEngine({
+    envs: ["browser", "mocha"],
+    useEslintrc: false,
+    rules: {
+        semi: 2
+    }
+});
+
+// lint the supplied text and optionally set
+// a filename that is displayed in the report
+var report = cli.executeOnText("test.js");
+console.dir(report);
+```
 -------
 ![](pic/saber.gif)
