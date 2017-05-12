@@ -42,6 +42,15 @@ Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工
 起初，Ryan Dahl称她的项目为web.js,就是一个Web服务器，但是项目的发展超过了他最初构想，变成了一个构建网络应用的基础框架。每个NODE进程都构成网络应用中的一个节点，这就是NODE名字所含意义的真谛。
 
 虽然NODE这么酷炫但是我们都不用我们只用它写脚本。
+## NPM
+npm 即node的安装包管理工具(就像nuget之于.NET,pip之于python)
+
+[npm 命令手册](https://segmentfault.com/a/1190000004894400)
+
+- npm -v 显示版本信息
+- npm install <packageName> [--save]?
+- npm update
+
 
 ## 指令&数据
 
@@ -110,5 +119,49 @@ var cli = new CLIEngine({
 var report = cli.executeOnText("test.js");
 console.dir(report);
 ```
+
+## gulp
+- [gulp入门教程](http://blog.csdn.net/xllily_11/article/details/51393569)
+
+- [gulpjs](http://www.gulpjs.com.cn/docs/)
+```
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
+ 
+gulp.task('lint', () => {
+    // ESLint ignores files with "node_modules" paths. 
+    // So, it's best to have gulp ignore the directory as well. 
+    // Also, Be sure to return the stream from the task; 
+    // Otherwise, the task may end before the stream has finished. 
+    return gulp.src(['**/*.js','!node_modules/**'])
+        // eslint() attaches the lint output to the "eslint" property 
+        // of the file object so it can be used by other modules. 
+        .pipe(eslint())
+        // eslint.format() outputs the lint results to the console. 
+        // Alternatively use eslint.formatEach() (see Docs). 
+        .pipe(eslint.format())
+        // To have the process exit with an error code (1) on 
+        // lint error, return the stream and pipe to failAfterError last. 
+        .pipe(eslint.failAfterError());
+});
+ 
+gulp.task('default', ['lint'], function () {
+    // This will only run if the lint task is successful... 
+});
+```
+
+## grunt
+```
+require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks 
+ 
+grunt.initConfig({
+    eslint: {
+        target: ['file.js']
+    }
+});
+ 
+grunt.registerTask('default', ['eslint']);
+```
+
 -------
 ![](pic/saber.gif)
