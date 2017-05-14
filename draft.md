@@ -18,21 +18,23 @@
 因此，这世上也不存在一种语言可以做，而另一种语言不可以做的事儿
 
 ## javascript
-javascript 借鉴了 C,Scheme,Self,Java 的设计。
+995年5月，Brendan Eich只用了10天，就设计完成了这种语言的第一版。它是一个大杂烩，语法有多个来源：
 
-javascript “基于对象” 任何事都是对象，所以你可以使用面向对象的编程风格
-
-javascript [First-class function](https://en.wikipedia.org/wiki/First-class_function),所以你可以使用函数式编程
-
-所以做一件事在javascript 中往往有多种方式
+基本语法：借鉴C语言和Java语言。
+数据结构：借鉴Java语言，包括将值分成原始值和对象两大类。
+函数的用法：借鉴Scheme语言和Awk语言，将函数当作第一等公民，并引入闭包。
+原型继承模型：借鉴Self语言（Smalltalk的一种变种）。
+正则表达式：借鉴Perl语言。
+字符串和数组处理：借鉴Python语言。
+为了保持简单，这种脚本语言缺少一些关键的功能，比如块级作用域、模块、子类型（subtyping）等等，但是可以利用现有功能找出解决办法。这种功能的不足，直接导致了后来JavaScript的一个显著特点：对于其他语言，你需要学习语言的各种功能，而对于JavaScript，你常常需要学习各种解决问题的模式。而且由于来源多样，从一开始就注定，JavaScript的编程风格是函数式编程和面向对象编程的一种混合体。
 ## first-class
 
-通常，编程语言会限制操作计算元素的途径。带有最少限制的元素被称为具有一等地位。一些一等元素的“权利和特权”是：
+### 通常，编程语言会限制操作计算元素的途径。带有最少限制的元素被称为具有一等地位。一些一等元素的“权利和特权”是：
 
-它们可以绑定到名称。
-它们可以作为参数向函数传递。
-它们可以作为函数的返回值返回。
-它们可以包含在好素具结构中。
+- 它们可以绑定到名称。
+- 它们可以作为参数向函数传递。
+- 它们可以作为函数的返回值返回。
+- 它们可以包含在好素具结构中。
 
 ## NODE
 Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工作都是围绕高性能Web服务器进行的。经历过一些尝试和失败之后，他找到了设计高性能Web服务器的几个要点：事件驱动，非阻塞I/O.
@@ -42,6 +44,25 @@ Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工
 起初，Ryan Dahl称她的项目为web.js,就是一个Web服务器，但是项目的发展超过了他最初构想，变成了一个构建网络应用的基础框架。每个NODE进程都构成网络应用中的一个节点，这就是NODE名字所含意义的真谛。
 
 虽然NODE这么酷炫但是我们都不用我们只用它写脚本。
+## 模块组织
+随着javascript发展，从增强显示的脚本到解决一类问题的库，然后构建应用，一个有效的模块加载方案也就成为了必须的元素。
+
+- 浏览器端运用最广泛的为 AMD 规范
+- 服务端使用 CommonJS 规范
+- 而ES6 Module 加载规范不远的将来将要统一前后端（我们要是采用ES6 加载规范）
+
+-[javascript模块化编程](http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html)
+
+require AMD 写在回调中是因为如果同步等他浏览器可能会卡死，
+
+关于 C# C++ 之类的编译执行，是因为有一个标准入口的文件（或者模块机制），所有的依赖关系配置都可以通过入口推出
+
+现在浏览器也是先编译后解析的为了速度
+而 javascript 尤其运行在浏览器端并没标准统一的入口，通过简陋的<script>标签引入，所以无法判断一个文件中出现的对象该有何种行为，而且script 还可能使动态加载的
+
+so 推出以后js 以后实现编译，在IDE 中运行编译
+
+当想用一个语言构建一个大型应用
 ## NPM
 npm 即node的安装包管理工具(就像nuget之于.NET,pip之于python)
 
@@ -49,9 +70,30 @@ npm 即node的安装包管理工具(就像nuget之于.NET,pip之于python)
 
 - npm -v 显示版本信息
 - npm install <packageName> [--save]?
+```
+$ npm install sax@latest
+$ npm install sax@0.1.1
+$ npm install sax@">=0.1.0 <0.2.0"
+```
 - npm update
+- npm -l //查看每个命令的用法
+- npm info npm
+
+- npm run 
+
+```
+npm install eslint  uglify-js --save
+"scripts": {
+  "lint": "eslint script.js ",
+  "compile": "babel script.js",
+  "uglifyjs ":"uglifyjs inet.js -o inet-min.js",
+  "template": "node bin/templete.js",
+  "launch": "launch.cmd",
+  "build":"npm run lint &&npm run compile&&npm run launch"
+},
 
 
+```
 ## 指令&数据
 
 这两个概念在计算机世界无处不在，一般数据的载体的就是文件，而这个文件在一定的环境下又变成了指令。如：一个HTML文件放在服务器上就是数据，而当浏览器获取了它，并将其解析绚丽的页面它就成了指令。
@@ -122,7 +164,7 @@ console.dir(report);
 
 ## gulp
 - [gulp入门教程](http://blog.csdn.net/xllily_11/article/details/51393569)
-
+- [gulp-ruanyifeng](http://javascript.ruanyifeng.com/tool/gulp.html#toc3)
 - [gulpjs](http://www.gulpjs.com.cn/docs/)
 ```
 const gulp = require('gulp');

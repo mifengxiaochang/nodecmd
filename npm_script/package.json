@@ -1,0 +1,18 @@
+{
+    "name": "npm-scirpt",
+    "version": "1.0.0",
+    "description": "a demo for npm run",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint script.js ",
+        "compile": "babel script.js",
+        "uglifyjs ": "uglifyjs inet.js -o inet-min.js",
+        "template": "node bin/templete.js",
+        "launch": "launch.cmd"
+    },
+    "author": "liz",
+    "license": "ISC",
+    "dependencies": {
+        "eslint": "^3.19.0"
+    }
+}
