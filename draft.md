@@ -17,25 +17,6 @@
 
 因此，这世上也不存在一种语言可以做，而另一种语言不可以做的事儿
 
-## javascript
-995年5月，Brendan Eich只用了10天，就设计完成了这种语言的第一版。它是一个大杂烩，语法有多个来源：
-
-基本语法：借鉴C语言和Java语言。
-数据结构：借鉴Java语言，包括将值分成原始值和对象两大类。
-函数的用法：借鉴Scheme语言和Awk语言，将函数当作第一等公民，并引入闭包。
-原型继承模型：借鉴Self语言（Smalltalk的一种变种）。
-正则表达式：借鉴Perl语言。
-字符串和数组处理：借鉴Python语言。
-为了保持简单，这种脚本语言缺少一些关键的功能，比如块级作用域、模块、子类型（subtyping）等等，但是可以利用现有功能找出解决办法。这种功能的不足，直接导致了后来JavaScript的一个显著特点：对于其他语言，你需要学习语言的各种功能，而对于JavaScript，你常常需要学习各种解决问题的模式。而且由于来源多样，从一开始就注定，JavaScript的编程风格是函数式编程和面向对象编程的一种混合体。
-## first-class
-
-### 通常，编程语言会限制操作计算元素的途径。带有最少限制的元素被称为具有一等地位。一些一等元素的“权利和特权”是：
-
-- 它们可以绑定到名称。
-- 它们可以作为参数向函数传递。
-- 它们可以作为函数的返回值返回。
-- 它们可以包含在好素具结构中。
-
 ## NODE
 Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工作都是围绕高性能Web服务器进行的。经历过一些尝试和失败之后，他找到了设计高性能Web服务器的几个要点：事件驱动，非阻塞I/O.
 
@@ -44,6 +25,14 @@ Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工
 起初，Ryan Dahl称她的项目为web.js,就是一个Web服务器，但是项目的发展超过了他最初构想，变成了一个构建网络应用的基础框架。每个NODE进程都构成网络应用中的一个节点，这就是NODE名字所含意义的真谛。
 
 虽然NODE这么酷炫但是我们都不用我们只用它写脚本。
+
+## 命令行程序
+
+```bash
+C:\Users\Zhuo.Li>echo %PATHEXT%
+.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+```
+
 ## 模块组织
 随着javascript发展，从增强显示的脚本到解决一类问题的库，然后构建应用，一个有效的模块加载方案也就成为了必须的元素。
 
@@ -63,6 +52,47 @@ require AMD 写在回调中是因为如果同步等他浏览器可能会卡死�
 so 推出以后js 以后实现编译，在IDE 中运行编译
 
 当想用一个语言构建一个大型应用
+
+## AMD 
+```
+define(['module1', 'module2'], function(m1, m2) {
+
+    return {
+        method: function() {
+            m1.methodA();
+			m2.methodB();
+        }
+    };
+
+});
+
+require(['foo', 'bar'], function ( foo, bar ) {
+        foo.doSomething();
+});
+```
+## cmomonjs
+```
+//index.js
+const m1=require("module1");
+
+m1.dosomething()
+.........
+
+//module1
+......
+
+module.exports={
+dosomething:function(){
+    ....
+}
+}
+
+```
+
+## ES6
+
+
+
 ## NPM
 npm 即node的安装包管理工具(就像nuget之于.NET,pip之于python)
 
@@ -117,7 +147,7 @@ npm install eslint  uglify-js --save
 
 ### npm init 
 
-![](pic/npm-init.gif)
+![](https://github.com/advence-liz/nodecmd/blob/master/pic/npm-init.gif)
 
 ### npm install
 
@@ -207,3 +237,24 @@ grunt.registerTask('default', ['eslint']);
 
 -------
 ![](pic/saber.gif)
+
+# 废稿
+
+## javascript
+1995年5月，Brendan Eich只用了10天，就设计完成了这种语言的第一版。它是一个大杂烩，语法有多个来源：
+
+基本语法：借鉴C语言和Java语言。
+数据结构：借鉴Java语言，包括将值分成原始值和对象两大类。
+函数的用法：借鉴Scheme语言和Awk语言，将函数当作第一等公民，并引入闭包。
+原型继承模型：借鉴Self语言（Smalltalk的一种变种）。
+正则表达式：借鉴Perl语言。
+字符串和数组处理：借鉴Python语言。
+为了保持简单，这种脚本语言缺少一些关键的功能，比如块级作用域、模块、子类型（subtyping）等等，但是可以利用现有功能找出解决办法。这种功能的不足，直接导致了后来JavaScript的一个显著特点：对于其他语言，你需要学习语言的各种功能，而对于JavaScript，你常常需要学习各种解决问题的模式。而且由于来源多样，从一开始就注定，JavaScript的编程风格是函数式编程和面向对象编程的一种混合体。
+## first-class
+
+### 通常，编程语言会限制操作计算元素的途径。带有最少限制的元素被称为具有一等地位。一些一等元素的“权利和特权”是：
+
+- 它们可以绑定到名称。
+- 它们可以作为参数向函数传递。
+- 它们可以作为函数的返回值返回。
+- 它们可以包含在好素具结构中。

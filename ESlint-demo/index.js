@@ -1,7 +1,7 @@
 "use strict";
-var CLIEngine = require("eslint").CLIEngine;
+const CLIEngine = require("eslint").CLIEngine;
 
-var cli = new CLIEngine({
+const cli = new CLIEngine({
     envs: ["browser", "mocha"],
     useEslintrc: false,
     rules: {
