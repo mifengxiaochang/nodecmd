@@ -30,6 +30,7 @@ Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工
 ![](pic/chrome_node.png)
 
 - [Electron](https://electron.atom.io/)
+- [node-webkit](https://github.com/nwjs/nw.js)
 - [React Native](http://reactnative.cn/cases.html)
 ### NODE&Browser&W3C&ECMASCRIPT
 
@@ -75,14 +76,14 @@ npm install eslint  uglify-js --save
 
 不过大家在网上检索前端自动化，基本都会感觉前端自动化是grunt，gulp，webpack...,或者因为NODE才有了前端自动化。
 
-程序员能用脚本就不用手个性-->前端自动化古即有之，只是NODE未出之前从未如此强势！！！
+其实一直都存在，只是之前更多的是java，python...的实现，就像现在找寻一些工具基本也都是java，python，ruby 版的。
 
 ## 前端自动化都做什么
 
 - 压缩CSS，js。
 - 预编译HTML，JS，CSS 前端涉及到的语言。HTML ，CSS 抽象程度比较低为了更高效的开发一般 HTML，css 由 jade，less 等DSL(Domain Specific Language)编译而成。
 - 语法检查，格式整理，自动刷新页面等其它功能。
-
+当前主流的所有工具，基本都会提供两种调用方式： CLI&NODE API
 ## 命令行程序
 
 ### PATH
@@ -120,23 +121,23 @@ echo  Hello World
 
 ## 模块组织
 随着javascript发展，从增强显示的脚本到解决一类问题的库，然后构建应用，一个有效的模块加载方案也就成为了必须的元素。
-
+因为当想用一个语言构建一个大型应用，模块机制不可或缺。
 - 浏览器端运用最广泛的为 AMD 规范
 - 服务端使用 CommonJS 规范
 - 而ES6 Module 加载规范不远的将来将要统一前后端（我们要是采用ES6 加载规范）
 
 -[javascript模块化编程](http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html)
 
-require AMD 写在回调中是因为如果同步等他浏览器可能会卡死，
+require AMD 写在回调中是因为如果同步等他浏览器可能会卡死.
 
-关于 C# C++ 之类的编译执行，是因为有一个标准入口的文件（或者模块机制），所有的依赖关系配置都可以通过入口推出
+### 关于javascriptIDE 目前功能薄弱的思考
+javascript 尤其运行在浏览器端并没标准统一的入口，通过简陋的\<script\>标签引入，所以无法判断一个文件中出现的对象该有何种行为，而且script 还可能是动态加载的。
+必然不能像其他语言那样智能检验差错与提示，如果以后模块化编程根深蒂固，javascriptIDE也会像其他语言一样强大。
+有必要的话兴许还能实时预览，因为现在集成webkit渲染引擎开发桌面的应用正在蓬勃发展（比如我正在使用的vscode）
 
-现在浏览器也是先编译后解析的为了速度
-而 javascript 尤其运行在浏览器端并没标准统一的入口，通过简陋的\<script\>标签引入，所以无法判断一个文件中出现的对象该有何种行为，而且script 还可能使动态加载的
 
-so 推出以后js 以后实现编译，在IDE 中运行编译
 
-当想用一个语言构建一个大型应用
+
 
 ## AMD 
 
