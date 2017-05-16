@@ -437,7 +437,7 @@ module.exports = {
 };
 ```
 ## 运行展示
-![](./https://github.com/advence-liz/nodecmd/blob/master/pic/webpack_nodeapi.gif)
+![](https://github.com/advence-liz/nodecmd/blob/master/pic/webpack_nodeapi.gif)
 ## HtmlWebpackPlugin
 ### _layout.html
 ```html

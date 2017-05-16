@@ -1,4 +1,4 @@
-# 前端自动化
+# 由webpack引发的前端自动化讲解
 
 ## 对NODE的误解
 
@@ -83,7 +83,7 @@ npm install eslint  uglify-js --save
 - 压缩CSS，js。
 - 预编译HTML，JS，CSS 前端涉及到的语言。HTML ，CSS 抽象程度比较低为了更高效的开发一般 HTML，css 由 jade，less 等DSL(Domain Specific Language)编译而成。
 - 语法检查，格式整理，自动刷新页面等其它功能。
-当前主流的所有工具，基本都会提供两种调用方式： CLI&NODE API
+当前主流的所有工具，基本都会提供两种调用方式： **CLI & NODEAPI**
 ## 命令行程序
 
 ### PATH
@@ -177,58 +177,86 @@ dosomething:function(){
 ```
 
 ## ES6
+```javascript
 
+//由于import是静态执行，所以不能使用表达式和变量，这些只有在运行时才能得到结果的语法结构。
 
+// 报错
+import { 'f' + 'oo' } from 'my_module';
 
+// 报错
+let module = 'my_module';
+import { foo } from module;
 
-## ESlint
-
-### npm init //https://github.com/advence-liz/nodecmd/blob/master/ 
-
-![](pic/npm-init.gif)
-
-### npm install
-
-![](pic/npm-install.gif)
-### node index.js
-
-![](pic/node-run.gif)
-
-### package.json
-```
-{
-  "name": "eslint-demo",
-  "version": "1.0.0",
-  "description": "a demo for eslint",
-  "main": "index.js",
-  "scripts": {
-    "test": "npm run test"
-  },
-  "author": "liz",
-  "license": "ISC",
-  "dependencies": {
-    "eslint": "^3.19.0"
-  }
+// 报错
+if (x === 1) {
+  import { foo } from 'module1';
+} else {
+  import { foo } from 'module2';
 }
+//上面三种写法都会报错，因为它们用到了表达式、变量和if结构。在静态分析阶段，这些语法都是没法得到值的。
+```
+
+### aui.js
+```javascript
+"use strict";
+
+var aui ={
+    version:'1.0.0'
+}
+function func(){
+
+    return aui.version;
+}
+//export default aui;
+export default func;
+```
+### widget.js
+```javascript
+var combobox = {
+    name:'combobox'
+}
+
+var dialog = {
+    name:'dialog'
+}
+
+export { combobox,dialog}
 ```
 ### index.js
-```
-"use strict";
-var CLIEngine = require("eslint").CLIEngine;
+```javascript
+import aui from './aui';
 
-var cli = new CLIEngine({
-    envs: ["browser", "mocha"],
-    useEslintrc: false,
-    rules: {
-        semi: 2
-    }
-});
+import {combobox,dialog as _dialog} from './widget';
 
-// lint the supplied text and optionally set
-// a filename that is displayed in the report
-var report = cli.executeOnText("test.js");
-console.dir(report);
+console.dir(combobox.name);
+
+console.log(_dialog.name);
+
+console.dir(func());
 ```
+### index.html
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./lib/library1"></script>
+    <script src="./lib/library2"></script>
+    <script src="global.common.js"></script>
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+   
+    <script type="text/javascript" src="index.js"></script>
+  </body>   
+</html>
+```
+
+
+
 
 ## gulp
 - [gulp入门教程](http://blog.csdn.net/xllily_11/article/details/51393569)
@@ -276,6 +304,196 @@ grunt.registerTask('default', ['eslint']);
 -------
 ![](pic/saber.gif)
 
+# DEMO
+## CLI_DEMO
+### helloworld
+```bash
+echo  Hello World
+```
+![](pic/cli_demo.gif)
+
+## ESlint(主要演示npm命令)
+
+### npm init //https://github.com/advence-liz/nodecmd/blob/master/ 
+
+![](pic/npm-init.gif)
+
+### npm install
+
+![](pic/npm-install.gif)
+### node index.js
+
+![](pic/node-run.gif)
+
+### package.json
+```
+{
+  "name": "eslint-demo",
+  "version": "1.0.0",
+  "description": "a demo for eslint",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "liz",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^3.19.0"
+  }
+}
+```
+### index.js
+```
+"use strict";
+var CLIEngine = require("eslint").CLIEngine;
+
+var cli = new CLIEngine({
+    envs: ["browser", "mocha"],
+    useEslintrc: false,
+    rules: {
+        semi: 2
+    }
+});
+
+// lint the supplied text and optionally set
+// a filename that is displayed in the report
+var report = cli.executeOnText("test.js");
+console.dir(report);
+```
+## webpack NODEAPI
+### js
+```javascript
+const webpack = require("webpack");
+//const pkg = require("../package");
+const webpack_config= require("../webpack.dev.js")
+
+webpack(webpack_config, (err, stats) => {
+    console.log(stats.toString());
+//   if (err || stats.hasErrors()) {
+//     // 在这里处理错误
+//   }
+  // 处理完成
+});
+```
+### webpack.config
+```javascript
+//var webpack = require('webpack');
+var path = require("path"),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+
+
+module.exports = {
+    entry: {
+        bundle: "./src/hello.js",
+        // react:"./src/react.js",
+        index:"./webpack_demo/index.js"
+    },
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: "[name].js"
+
+    },
+    module: {
+        rules: [
+            // {
+            //     test: /\.js$/,
+            //     enforce: "pre",
+            //     loader: "eslint-loader"
+            // },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: [{
+                    loader: 'babel-loader'
+                }]
+            }]
+
+    },
+    context: __dirname,
+    devtool: "source-map",
+    target: "web",
+    resolve: {
+        // options for resolving module requests
+        // (does not apply to resolving to loaders)
+        modules: [
+            "node_modules",
+            path.resolve(__dirname, "node_modules")
+        ],
+        // directories where to look for modules
+        extensions: [".js", ".json", ".jsx", ".css"],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'template/_layout.html'
+        })
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "build"),
+        compress: true,
+        port: 9000
+    }
+
+};
+```
+## 运行展示
+![](./pic/webpack_nodeapi.gif)
+## HtmlWebpackPlugin
+### _layout.html
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="http://cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+     <jspath>
+  </body>
+</html>
+```
+### template.js
+```javascript
+const fs=require("fs");
+const path= require("path");
+/**
+ * 此处readFile&writeFile 没有使用相对路径，因为如果是相对路径，是相对于当前进程所在的路径（process.cmd()），而不是相对于当前脚本所在的路径。
+ */
+var fileName= path.resolve(__dirname,'_layout.html');
+var distPath = path.resolve(__dirname,'index.html');
+var template = fs.readFileSync(fileName, 'utf8');
+
+template = template.toString().replace(/<jspath>/,`<script src="bundle.js"></script>`);
+
+fs.writeFile(distPath,template,(err) => {
+  if (err) throw err;
+  console.log('It\'s saved!');
+});
+```
+### index.html
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="http://cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+     <script src="bundle.js"></script>
+  </body>
+</html>
+```
+
+
+
 # 废稿
 
 ## javascript
@@ -296,3 +514,19 @@ grunt.registerTask('default', ['eslint']);
 - 它们可以作为参数向函数传递。
 - 它们可以作为函数的返回值返回。
 - 它们可以包含在好素具结构中。
+## ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict"
+- 变量必须声明后再使用
+- 函数的参数不能有同名属性，否则报错
+- 不能使用with语句
+- 不能对只读属性赋值，否则报错
+- 不能使用前缀0表示八进制数，否则报错
+- 不能删除不可删除的属性，否则报错
+- 不能删除变量delete prop，会报错，只能删除属性delete global[prop]
+- eval不会在它的外层作用域引入变量
+- eval和arguments不能被重新赋值
+- arguments不会自动反映函数参数的变化
+- 不能使用arguments.callee
+- 不能使用arguments.caller
+- 禁止this指向全局对象
+- 不能使用fn.caller和fn.arguments获取函数调用的堆栈
+- 增加了保留字（比如protected、static和interface）

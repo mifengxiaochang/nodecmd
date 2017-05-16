@@ -6,4 +6,4 @@ console.dir(combobox.name);
 
 console.log(_dialog.name);
 
-console.dir(aui);
+console.dir(func());

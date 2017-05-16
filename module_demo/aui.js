@@ -7,5 +7,5 @@ function func(){
 
     return aui.version;
 }
-export default aui;
-//export default func;
+//export default aui;
+export default func;
