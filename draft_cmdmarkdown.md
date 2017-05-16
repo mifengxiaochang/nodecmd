@@ -177,8 +177,10 @@ dosomething:function(){
 ```
 
 ## ES6
+### import
 ```javascript
-
+//import
+import { stat as _stat, exists, readFile } from 'fs';
 //由于import是静态执行，所以不能使用表达式和变量，这些只有在运行时才能得到结果的语法结构。
 
 // 报错
@@ -195,6 +197,38 @@ if (x === 1) {
   import { foo } from 'module2';
 }
 //上面三种写法都会报错，因为它们用到了表达式、变量和if结构。在静态分析阶段，这些语法都是没法得到值的。
+```
+### export
+```javascript
+export var firstName = 'Michael';
+export var lastName = 'Jackson';
+export var year = 1958;
+//上面代码是profile.js文件，保存了用户信息。ES6 将其视为一个模块，里面用export命令对外部输出了三个变量。
+
+//export的写法，除了像上面这样，还有另外一种。
+
+// profile.js
+var firstName = 'Michael';
+var lastName = 'Jackson';
+var year = 1958;
+
+export {firstName as _firstName, lastName, year};
+
+
+```
+### export default
+```javascript
+/ export-default.js
+export default function () {
+  console.log('foo');
+}
+上面代码是一个模块文件export-default.js，它的默认输出是一个函数。
+
+其他模块加载该模块时，import命令可以为该匿名函数指定任意名字。
+
+// import-default.js
+import customName from './export-default';
+customName(); // 'foo'
 ```
 
 ### aui.js
@@ -254,7 +288,107 @@ console.dir(func());
   </body>   
 </html>
 ```
+## webpack
+> 使用配置文件的用法
+ webpack [--config webpack.config.js]
+```bash
+$ webpack --config example.config.js
+```
 
+
+>不使用配置文件的用法
+webpack <entry> [<entry>] <output>
+
+```bash
+$ webpack src/index.js dist/bundle.js
+```
+> NODE API
+```javascript
+const webpack = require("webpack");
+
+webpack({
+  // 配置对象
+}, (err, stats) => {
+  if (err || stats.hasErrors()) {
+    // 在这里处理错误
+  }
+  // 处理完成
+});
+```
+
+### webpackConfig
+
+```javascript
+//webpack.config.js
+
+var pkg = require("./package"),
+    options = process.argv,
+    config;
+
+/**
+ * pkg.pattern {dev|prod} 原计划package.json 中配置是否为product 目前没有使用
+ */
+config = require("./webpack." + pkg.env);
+module.exports = config;
+```
+```javascript
+//var webpack = require('webpack');
+var path = require("path"),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+    entry: {
+        bundle: "./src/hello.js",
+        // react:"./src/react.js",
+        index:"./webpack_demo/index.js"
+    },
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: "[name].js"
+
+    },
+    module: {
+        rules: [
+            // {
+            //     test: /\.js$/,
+            //     enforce: "pre",
+            //     loader: "eslint-loader"
+            // },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: [{
+                    loader: 'babel-loader'
+                }]
+            }]
+
+    },
+    context: __dirname,
+    devtool: "source-map",
+    target: "web",
+    resolve: {
+        // options for resolving module requests
+        // (does not apply to resolving to loaders)
+        modules: [
+            "node_modules",
+            path.resolve(__dirname, "node_modules")
+        ],
+        // directories where to look for modules
+        extensions: [".js", ".json", ".jsx", ".css"],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'template/_layout.html'
+        })
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "build"),
+        compress: true,
+        port: 9000
+    }
+
+};
+```
 
 
 

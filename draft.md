@@ -179,8 +179,10 @@ dosomething:function(){
 ```
 
 ## ES6
+### import
 ```javascript
-
+//import
+import { stat as _stat, exists, readFile } from 'fs';
 //由于import是静态执行，所以不能使用表达式和变量，这些只有在运行时才能得到结果的语法结构。
 
 // 报错
@@ -197,6 +199,38 @@ if (x === 1) {
   import { foo } from 'module2';
 }
 //上面三种写法都会报错，因为它们用到了表达式、变量和if结构。在静态分析阶段，这些语法都是没法得到值的。
+```
+### export
+```javascript
+export var firstName = 'Michael';
+export var lastName = 'Jackson';
+export var year = 1958;
+//上面代码是profile.js文件，保存了用户信息。ES6 将其视为一个模块，里面用export命令对外部输出了三个变量。
+
+//export的写法，除了像上面这样，还有另外一种。
+
+// profile.js
+var firstName = 'Michael';
+var lastName = 'Jackson';
+var year = 1958;
+
+export {firstName as _firstName, lastName, year};
+
+
+```
+### export default
+```javascript
+/ export-default.js
+export default function () {
+  console.log('foo');
+}
+上面代码是一个模块文件export-default.js，它的默认输出是一个函数。
+
+其他模块加载该模块时，import命令可以为该匿名函数指定任意名字。
+
+// import-default.js
+import customName from './export-default';
+customName(); // 'foo'
 ```
 
 ### aui.js
