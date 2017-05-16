@@ -128,7 +128,7 @@ echo  Hello World
 
 -[javascript模块化编程](http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html)
 
-require AMD 写在回调中是因为如果同步等他浏览器可能会卡死.
+
 
 ### 关于javascriptIDE 目前功能薄弱的思考
 javascript 尤其运行在浏览器端并没标准统一的入口，通过简陋的\<script\>标签引入，所以无法判断一个文件中出现的对象该有何种行为，而且script 还可能是动态加载的。
@@ -181,8 +181,8 @@ dosomething:function(){
 ```javascript
 //import
 import { stat as _stat, exists, readFile } from 'fs';
-//由于import是静态执行，所以不能使用表达式和变量，这些只有在运行时才能得到结果的语法结构。
 
+//由于import是静态执行，所以不能使用表达式和变量，这些只有在运行时才能得到结果的语法结构。
 // 报错
 import { 'f' + 'oo' } from 'my_module';
 
@@ -289,6 +289,9 @@ console.dir(func());
 </html>
 ```
 ## webpack
+webpack 是一个现代的 JavaScript 应用程序的模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图表(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成少量的 bundle - 通常只有一个，由浏览器加载。
+
+它是高度可配置的，但是，在开始前你需要先理解四个核心概念：入口(entry)、输出(output)、loader、插件(plugins)。
 > 使用配置文件的用法
  webpack [--config webpack.config.js]
 ```bash
