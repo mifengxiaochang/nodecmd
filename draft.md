@@ -581,7 +581,7 @@ module.exports = {
 };
 ```
 ## 运行展示
-![](./pic/webpack_nodeapi.gif)
+![](pic/webpack_nodeapi.gif)
 ## HtmlWebpackPlugin
 ### _layout.html
 ```html
