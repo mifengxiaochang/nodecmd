@@ -1,4 +1,4 @@
-# 由webpack引发的前端自动化讲解
+# [由webpack引发的前端自动化讲解](https://www.zybuluo.com/advence-liz/note/755852)
 
 ## 对NODE的误解
 
@@ -38,7 +38,7 @@ Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工
 ## NPM
 npm 即node的安装包管理工具(就像nuget之于.NET,pip之于python)
 
-[npm 命令手册](https://segmentfault.com/a/1190000004894400)
+[npm 命令手册](http://javascript.ruanyifeng.com/nodejs/npm.html#toc1)
 
 - npm -v 显示版本信息
 - npm install <packageName> [--save]?
@@ -61,7 +61,8 @@ npm install eslint  uglify-js --save
   "uglifyjs ":"uglifyjs inet.js -o inet-min.js",
   "template": "node bin/templete.js",
   "launch": "launch.cmd",
-  "build":"npm run lint &&npm run compile&&npm run launch"
+  "build":"npm run lint &&npm run compile&&npm run launch",
+  ""
 },
 
 
