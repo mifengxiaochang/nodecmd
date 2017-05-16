@@ -27,14 +27,14 @@ Ryan Dahl 是一名资深的程序员，在创造出NODE之前，他的主要工
 虽然NODE这么酷炫但是我们都不用我们只用它写脚本。
 
 ### Chrome&Node
-![](https://github.com/advence-liz/nodecmd/blob/master/pic/chrome_node.png)
+![](http://auifw.avepoint.net/pic/chrome_node.png)
 
 - [Electron](https://electron.atom.io/)
 - [node-webkit](https://github.com/nwjs/nw.js)
 - [React Native](http://reactnative.cn/cases.html)
 ### NODE&Browser&W3C&ECMASCRIPT
 
-![](https://github.com/advence-liz/nodecmd/blob/master/pic/node_w3c.png)
+![](http://auifw.avepoint.net/pic/node_w3c.png)
 ## NPM
 npm 即node的安装包管理工具(就像nuget之于.NET,pip之于python)
 
@@ -302,7 +302,7 @@ grunt.registerTask('default', ['eslint']);
 ```
 
 -------
-![](https://github.com/advence-liz/nodecmd/blob/master/pic/saber.gif)
+![](http://auifw.avepoint.net/pic/saber.gif)
 
 # DEMO
 ## CLI_DEMO
@@ -310,20 +310,20 @@ grunt.registerTask('default', ['eslint']);
 ```bash
 echo  Hello World
 ```
-![](https://github.com/advence-liz/nodecmd/blob/master/pic/cli_demo.gif)
+![](http://auifw.avepoint.net/pic/cli_demo.gif)
 
 ## ESlint(主要演示npm命令)
 
-### npm init //https://github.com/advence-liz/nodecmd/blob/master/ 
+### npm init
 
-![](https://github.com/advence-liz/nodecmd/blob/master/pic/npm-init.gif)
+![](http://auifw.avepoint.net/pic/npm-init.gif)
 
 ### npm install
 
-![](https://github.com/advence-liz/nodecmd/blob/master/pic/npm-install.gif)
+![](http://auifw.avepoint.net/pic/npm-install.gif)
 ### node index.js
 
-![](https://github.com/advence-liz/nodecmd/blob/master/pic/node-run.gif)
+![](http://auifw.avepoint.net/pic/node-run.gif)
 
 ### package.json
 ```
@@ -360,6 +360,10 @@ var cli = new CLIEngine({
 var report = cli.executeOnText("test.js");
 console.dir(report);
 ```
+## run webpack
+![](http://auifw.avepoint.net/pic/run_webpack.gif)
+## run webpack-dev-server
+![](http://auifw.avepoint.net/pic/run_webpack_server.gif)
 ## webpack NODEAPI
 ### js
 ```javascript
@@ -437,7 +441,7 @@ module.exports = {
 };
 ```
 ## 运行展示
-![](https://github.com/advence-liz/nodecmd/blob/master/pic/webpack_nodeapi.gif)
+![](http://auifw.avepoint.net/pic/webpack_nodeapi.gif)
 ## HtmlWebpackPlugin
 ### _layout.html
 ```html

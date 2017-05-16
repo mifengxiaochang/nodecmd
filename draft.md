@@ -84,6 +84,8 @@ npm install eslint  uglify-js --save
 - 预编译HTML，JS，CSS 前端涉及到的语言。HTML ，CSS 抽象程度比较低为了更高效的开发一般 HTML，css 由 jade，less 等DSL(Domain Specific Language)编译而成。
 - 语法检查，格式整理，自动刷新页面等其它功能。
 当前主流的所有工具，基本都会提供两种调用方式： **CLI & NODEAPI**
+
+
 ## 命令行程序
 
 ### PATH
@@ -255,7 +257,110 @@ console.dir(func());
 </html>
 ```
 
+## webpack
+> 使用配置文件的用法
+ webpack [--config webpack.config.js]
+```bash
+$ webpack --config example.config.js
+```
 
+
+>不使用配置文件的用法
+webpack <entry> [<entry>] <output>
+
+```bash
+$ webpack src/index.js dist/bundle.js
+```
+> NODE API
+```javascript
+const webpack = require("webpack");
+
+webpack({
+  // 配置对象
+}, (err, stats) => {
+  if (err || stats.hasErrors()) {
+    // 在这里处理错误
+  }
+  // 处理完成
+});
+```
+
+### webpackConfig
+
+```javascript
+//webpack.config.js
+
+var pkg = require("./package"),
+    options = process.argv,
+    config;
+
+/**
+ * pkg.pattern {dev|prod} 原计划package.json 中配置是否为product 目前没有使用
+ */
+config = require("./webpack." + pkg.env);
+module.exports = config;
+```
+```javascript
+//var webpack = require('webpack');
+var path = require("path"),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+    entry: {
+        bundle: "./src/hello.js",
+        // react:"./src/react.js",
+        index:"./webpack_demo/index.js"
+    },
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: "[name].js"
+
+    },
+    module: {
+        rules: [
+            // {
+            //     test: /\.js$/,
+            //     enforce: "pre",
+            //     loader: "eslint-loader"
+            // },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: [{
+                    loader: 'babel-loader'
+                }]
+            }]
+
+    },
+    context: __dirname,
+    devtool: "source-map",
+    target: "web",
+    resolve: {
+        // options for resolving module requests
+        // (does not apply to resolving to loaders)
+        modules: [
+            "node_modules",
+            path.resolve(__dirname, "node_modules")
+        ],
+        // directories where to look for modules
+        extensions: [".js", ".json", ".jsx", ".css"],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'template/_layout.html'
+        })
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "build"),
+        compress: true,
+        port: 9000
+    }
+
+};
+```
+
+
+##
 
 
 ## gulp
@@ -360,6 +465,10 @@ var cli = new CLIEngine({
 var report = cli.executeOnText("test.js");
 console.dir(report);
 ```
+## run webpack
+![](pic/run_webpack.gif)
+## run webpack-dev-server
+![](pic/run_webpack_server.gif)
 ## webpack NODEAPI
 ### js
 ```javascript
