@@ -31,3 +31,8 @@ webpack & require
 - 为了性能优化 require 需要额外的工具 r.js 合并代码
 
 - require 全局维护模块依赖关系，webpack 只在合并文件的内部维护依赖关系
+
+
+# 总结
+- 总结注意侧重点
+- 放慢速度
