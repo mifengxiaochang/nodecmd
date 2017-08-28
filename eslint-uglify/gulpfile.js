@@ -2,19 +2,21 @@
 
 const gulp = require('gulp'),
     path = require("path"),
-    pkg = require("./package"),
     eslint = require('gulp-eslint'),
     uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps');
 
+gulp.task('copy:sources',function(){
+    return gulp.src(path.join('Scripts','**','*.js'),{base:'.'})
+           .pipe(gulp.dest(path.join('Sources')))
+})
 
-
-gulp.task('uglify', function () {
+gulp.task('uglify',['copy:sources'],function () {
     return gulp.src(['Scripts/**/*.js'], { base: '.' })
         .pipe(sourcemaps.init())
         .pipe(uglify({mangle:false}))//不改变变量名
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.resolve(__dirname,'dist')));
+        .pipe(gulp.dest('./dist/'));
 });
 
 

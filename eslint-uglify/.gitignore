@@ -5,6 +5,7 @@ node_modules/
 Scripts/
 test/
 build/
+sources/
 .vscode/
 bower_components/
 npm-debug.log
