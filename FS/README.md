@@ -1,5 +1,7 @@
 # FS
 
+## REF
+- [vinyl](https://github.com/gulpjs/vinyl)
 ## Stream
 Node.js 中有四种基本的流类型：
 

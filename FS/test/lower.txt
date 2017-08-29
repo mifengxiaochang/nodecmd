@@ -1,1 +1,221 @@
 sdasssssssssssssssssssffffffliz
+fdddddddddddddddddddddddddd
+dfffffffffffffffffffffffffffffff
+dffffffffffffffffffffffffffffffffffffff
+
+
+
+
+
+
+bddddddddddddddddddddddddddd
+ddddddddddddddddddddddddddddddddddddddddd
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+<?xml version="1.0" encoding="utf-8"?>
+<!--/********************************************************************
+ *
+ *  PROPRIETARY and CONFIDENTIAL
+ *
+ *  This file is licensed from, and is a trade secret of:
+ *
+ *                   AvePoint, Inc.
+ *                   Harborside Financial Center
+ *                   9th Fl.   Plaza Ten
+ *                   Jersey City, NJ 07311
+ *                   United States of America
+ *                   Telephone: +1-800-661-6588
+ *                   WWW: www.avepoint.com
+ *
+ *  Refer to your License Agreement for restrictions on use,
+ *  duplication, or disclosure.
+ *
+ *  RESTRICTED RIGHTS LEGEND
+ *
+ *  Use, duplication, or disclosure by the Government is
+ *  subject to restrictions as set forth in subdivision
+ *  (c)(1)(ii) of the Rights in Technical Data and Computer
+ *  Software clause at DFARS 252.227-7013 (Oct. 1988) and
+ *  FAR 52.227-19 (C) (June 1987).
+ *
+ *  Copyright © 2001-2017 AvePoint® Inc. All Rights Reserved.
+ *
+ *  Unpublished - All rights reserved under the copyright laws of the United States.
+ */-->
+<configuration>
+  <configSections>
+    <section name="castle" type="Castle.Windsor.Configuration.AppDomain.CastleSectionHandler, Castle.Windsor" />
+    <section name="GuiUpload" type="System.Configuration.NameValueSectionHandler" />
+    <section name="microsoft.identityModel" type="Microsoft.IdentityModel.Configuration.MicrosoftIdentityModelSection, Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <!--[Start]Refer http://support.microsoft.com/kb/833789. -->
+    <section name="system.directoryservices" type="System.DirectoryServices.SearchWaitHandler, System.DirectoryServices, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <!--[End]Refer http://support.microsoft.com/kb/833789. -->
+  </configSections>
+  <!--[Start]Refer http://support.microsoft.com/kb/833789. -->
+  <system.directoryservices>
+    <DirectorySearcher waitForPagedSearchData="true" />
+  </system.directoryservices>
+  <!--[End]Refer http://support.microsoft.com/kb/833789. -->
+  <runtime>
+    <generatePublisherEvidence enabled="false" />
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <probing privatePath="bin\Resources" />
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <castle>
+    <!--put the configuration of castle into Etc\Castle.config-->
+    <include uri="file://Config/ControlCastle.config" />
+  </castle>
+  <GuiUpload>
+    <add key="folder" value="Temp" />
+  </GuiUpload>
+  <system.web>
+    <trust level="Full" originUrl="" />
+    <compilation debug="true">
+      <assemblies>
+        <add assembly="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+      </assemblies>
+    </compilation>
+    <sessionState mode="Off" />
+    <identity impersonate="false" />
+    <authentication mode="Windows" />
+    <httpRuntime maxRequestLength="1048576" executionTimeout="3600" enableVersionHeader="false" />
+
+    <pages enableViewState="false" viewStateEncryptionMode="Never" validateRequest="false" />
+    <httpCookies httpOnlyCookies="true" requireSSL="true" />
+    <!--<customErrors defaultRedirect="DocAve.aspx" mode="On">
+      <error statusCode="500" redirect="500.aspx" />
+      <error statusCode="404" redirect="404.aspx" />
+      <error statusCode="403" redirect="403.aspx" />
+    </customErrors>-->
+    <customErrors mode="On" defaultRedirect="DocAve.aspx" />
+    <httpModules>
+      <add name="FederatedAuthentication" type="AvePoint.Common.SingleSignOn.CustomWSFederationAuthenticationModule" />
+      <add name="SessionAuthenticationModule" type="AvePoint.Common.SingleSignOn.CustomSessionAuthenticationModule" />
+      <add name="DirectoryChecker" type="AvePoint.Web.ServerModules.FilterModule" />
+    </httpModules>
+    <httpHandlers>
+      <add verb="*" path="FederationMetadata/2007-06/FederationMetadata.xml" type="AvePoint.Web.SingleSignOn.SingleSignOnFederationHandler,Control" />
+      <add verb="*" path="/auth/windows/config/" type="AvePoint.Web.SingleSignOn.WindowsAuthenticationEndpointHandler,Control" />
+    </httpHandlers>
+  </system.web>
+  <system.serviceModel>
+    <serviceHostingEnvironment aspNetCompatibilityEnabled="true" />
+    <!--put the configuration of WCF Services into etc\WcfServices.config -->
+    <services configSource="Config\ControlWCFServices.config" />
+    <client configSource="Config\ControlWCFClients.config" />
+    <behaviors configSource="Config\ControlWCFBehaviors.config" />
+    <bindings configSource="Config\ControlWCFBindings.config" />
+    <extensions configSource="Config\ControlWCFExtensions.config" />
+  </system.serviceModel>
+  <!--
+  This section is used for JobReport db. In order to change the background storage media.
+  We define the change Appsetting section to handle this.
+  -->
+  <!--
+  *******************************************************************************************************
+  -->
+  <appSettings>
+    <remove key="JobReportDb" />
+    <remove key="JobReportBasePath" />
+    <add key="JobReportDb" value="SQLiteJobReportDb" />
+    <!--Base path of Sqlite report file-->
+    <add key="JobReportBasePath" value=".\" />
+    <add key="TempFolderPath" value="..\Temp" />
+    <!--Control Service Configuration-->
+    <add key="ControlServiceAddress" value="10.1.55.107"/>
+    <add key="ControlServicePort" value="6001"/>
+    <add key="ConfigDatabaseInstance" value="10.1.5.183"/>
+    <add key="ConfigDatabaseName" value="DocAve6_ControlDB"/>
+    <add key="ConfigDatabaseUsername" value="sa" />
+    <add key="ConfigDatabasePassword" value="pt{1qaz2wsxE}" />
+    <add key="ConfigDatabaseIsIntegrated" value="true" />
+    <add key="ConfigDatabaseConnectionTimeOut" value="" />
+    <add key="ConfigDatabaseCommandTimeOut" value="" />
+    <add key="ConfigDatabaseFailoverPartner" value="" />
+    <add key="ConfigDatabaseUseAppPoolIdentity" value="" />
+    <add key="FipsMode" value="false" />
+    <add key="PersistentSessionLifetime" value="20" />
+    <add key="DefaultFederationServiceIdentifier" value="" />
+    <add key="PersistentSessionToken" value="false" />
+    <add key="AppPoolName" value="" />
+    <add key="AppPoolUserName" value="" />
+    <add key="AppPoolPassword" value="" />
+    <add key="WebSiteName" value="" />
+    <add key="SPTreeMaxChildrenCount" value="10000" />
+    <add key="SecurityMode" value="true" />
+    <add key="ShowProductVersion" value="true" />
+    <add key="IsVMMode" value="false" />
+    <add key="RequestLicenseUrl" value="" />
+  </appSettings>
+  <connectionStrings>
+    <!--for common use-->
+    <!--<add name="DatabaseModelContainer" connectionString="metadata=res://*/Model.DatabaseModel.csdl|res://*/Model.DatabaseModel.ssdl|res://*/Model.DatabaseModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=10.1.5.183;Initial Catalog=DocAve6_ControlDB;Persist Security Info=True;User ID=sa;Password=1qaz2wsxE;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="DatabaseModelContainer" connectionString="metadata=res://*/Model.DatabaseModel.csdl|res://*/Model.DatabaseModel.ssdl|res://*/Model.DatabaseModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=10.1.8.11;Initial Catalog=DocAveDB_Shaochen;Persist Security Info=True;User ID=sa;Password=1qaz2wsxE;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="DatabaseModelContainer" connectionString="metadata=res://*/Model.DatabaseModel.csdl|res://*/Model.DatabaseModel.ssdl|res://*/Model.DatabaseModel.msl;provider=Npgsql;provider connection string=&quot;HOST=localhost;PORT=5432;PROTOCOL=3;DATABASE=DocAve6;USER ID=admin;PASSWORD=Ljb123;SSL=False;SSLMODE=Disable;TIMEOUT=15;&quot;" providerName="System.Data.EntityClient" />-->
+    <!--for job report sqlite db use-->
+    <remove name="SQLiteJobReportDb" />
+    <add name="SQLiteJobReportDb" providerName="System.Data.SQLite" connectionString="justTest.db3" />
+  </connectionStrings>
+  <system.data>
+    <DbProviderFactories>
+      <!--<add name="Npgsql Data Provider" invariant="Npgsql" description=".Net Framework Data Provider for Postgresql Server" type="Npgsql.NpgsqlFactory, Npgsql, Version=2.0.11.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7" />-->
+      <remove invariant="System.Data.SQLite" />
+      <add name="SQLite Data Provider" invariant="System.Data.SQLite" description=".Net Framework Data Provider for SQLite" type="System.Data.SQLite.SQLiteFactory, System.Data.SQLite" />
+    </DbProviderFactories>
+  </system.data>
+  <system.webServer>
+    <security>
+      <requestFiltering>
+        <requestLimits maxAllowedContentLength="2147483648" />
+      </requestFiltering>
+    </security>
+    <modules>
+      <add name="FederatedAuthentication" type="AvePoint.Common.SingleSignOn.CustomWSFederationAuthenticationModule" />
+      <add name="SessionAuthenticationModule" type="AvePoint.Common.SingleSignOn.CustomSessionAuthenticationModule" />
+      <add name="DirectoryChecker" type="AvePoint.Web.ServerModules.FilterModule" />
+      <!--<add name="ClaimsPrincipalModule" type="Microsoft.IdentityModel.Web.ClaimsPrincipalHttpModule, Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>-->
+    </modules>
+    <httpErrors errorMode="Custom" existingResponse="Auto" defaultResponseMode="Redirect">
+      <remove statusCode="403" />
+      <remove statusCode="404" />
+      <remove statusCode="400" />
+      <!--<remove statusCode="401"/>-->
+      <error statusCode="404" prefixLanguageFilePath="" path="/Error/ControlPrintErrorInfo.html" responseMode="ExecuteURL" />
+      <error statusCode="403" prefixLanguageFilePath="" path="/Error/ControlPrintErrorInfo.html" responseMode="ExecuteURL" />
+      <error statusCode="400" prefixLanguageFilePath="" path="/Error/ControlPrintErrorInfo.html" responseMode="ExecuteURL" />
+      <!--
+      <error statusCode="500" prefixLanguageFilePath="" path="/Error/ControlPrintInternalError.html" responseMode="ExecuteURL" />
+      <error statusCode="501" prefixLanguageFilePath="" path="/Error/ControlPrintInternalError.html" responseMode="ExecuteURL" />
+      <error statusCode="502" prefixLanguageFilePath="" path="/Error/ControlPrintInternalError.html" responseMode="ExecuteURL" />
+      -->
+      <!--<error statusCode="401" prefixLanguageFilePath="" path="/Error/404.html" responseMode="ExecuteURL" />-->
+      <remove statusCode="500" />
+      <remove statusCode="501" />
+      <remove statusCode="502" />
+      <error statusCode="500" prefixLanguageFilePath="" path="/Error/ControlPrintInternalError.html" responseMode="ExecuteURL" />
+      <error statusCode="501" prefixLanguageFilePath="" path="/Error/ControlPrintInternalError.html" responseMode="ExecuteURL" />
+      <error statusCode="502" prefixLanguageFilePath="" path="/Error/ControlPrintInternalError.html" responseMode="ExecuteURL" />
+    </httpErrors>
+    <handlers>
+      <add name="Federation" verb="*" path="FederationMetadata/2007-06/FederationMetadata.xml" type="AvePoint.Web.SingleSignOn.SingleSignOnFederationHandler,Control" />
+      <add name="WindowsAuthConfig" verb="*" path="/auth/windows/config/" type="AvePoint.Web.SingleSignOn.WindowsAuthenticationEndpointHandler,Control" />
+    </handlers>
+    <validation validateIntegratedModeConfiguration="false" />
+    <!--<staticContent>
+        <clientCache cacheControlMode="DisableCache" />
+      </staticContent>
+      <httpProtocol>
+        <customHeaders>
+          <add name="Cache-Control" value="no-cache, no-store" />
+        </customHeaders>
+      </httpProtocol>-->
+  </system.webServer>
+  <!--
+  ***************************************************************************************************
+  -->
+  <system.diagnostics configSource="Config\SystemDiagnostics.config" />
+</configuration>
