@@ -58,9 +58,11 @@ function Log(path) {
         self.log(fileList);
     };
     this.close = function () {
-        //必须在 push null 前
-        this.readable.pipe(this.writeable);
-        this.log(null);
+         //不放在init里，防止初始化是文件夹不存在
+         this.writeable = fs.createWriteStream(path);
+         //必须在 push null 前
+         this.readable.pipe(this.writeable);
+         this.log(null);
 
     };
     this._init = function () {
@@ -69,7 +71,7 @@ function Log(path) {
         EventEmitter = require('events');
         this.writeable = fs.createWriteStream(path);
         this.readable = new Readable({
-            _read: function _read () { }
+            _read: function () { }
         });
         this.eventEmitter = new EventEmitter();
         fileList = [];
