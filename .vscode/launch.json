@@ -5,17 +5,17 @@
     "version": "0.2.0",
     "configurations": [
       
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "Launch Program",
+        //     "program": "${workspaceRoot}/FS/walk.js"
+        // },
         {
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}/FS/readable/myreadable.js"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/FS/transform.js"
+            "program": "${workspaceRoot}/FS/log.js"
         },
         {
             "type": "node",

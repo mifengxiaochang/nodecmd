@@ -2,6 +2,8 @@
 
 ## REF
 - [vinyl](https://github.com/gulpjs/vinyl)
+## tip
+关于文件操作的脚步必须用path.resolve 操作绝对路径，相对路径是以 process.cwd()定位的
 ## Stream
 Node.js 中有四种基本的流类型：
 
