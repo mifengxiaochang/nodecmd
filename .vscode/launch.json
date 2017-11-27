@@ -11,12 +11,12 @@
         //     "name": "Launch Program",
         //     "program": "${workspaceRoot}/FS/walk.js"
         // },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/FS/log.js"
-        },
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "Launch Program",
+        //     "program": "${workspaceRoot}/ca"
+        // },
         {
             "type": "node",
             "request": "launch",
