@@ -7,13 +7,8 @@ dist/
 bower_components/
  "**/.*"
  .vs/
- demo/
- pages/
-test/
 build/
-template/temp.html
-html/
-temp/
+
 prometheus3
 react-component
 #################
