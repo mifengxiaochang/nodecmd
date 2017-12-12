@@ -1,6 +1,8 @@
 # node
+---
+## tips
 
-## tip
+## snippets
 - vscode
 ```json
   {
