@@ -16,7 +16,7 @@
 
 
 ## 总结
-- node liz 可以执行 而跟有没有#!/usr/bin/env node 没有关系  liz 无后缀名  难道#!/usr/bin/env node 只是给人看的 可能全局命令的时候自己根据 env 选择解析程序吧
+- node liz 可以执行 而跟有没有#!/usr/bin/env node 没有关系  liz 无后缀名  难道#!/usr/bin/env node 只是给人看的 可能全局命令的时候自己根据 env 选择解析程序吧 最终发现原来不是给windows 系统使用的
 - 对比系统的环境变量和npm 软链接的位置，感慨万千
 - **npm link npm unlink**
 ```bash
