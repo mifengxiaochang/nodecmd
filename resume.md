@@ -13,7 +13,7 @@
 
 **前端工程师** 
 
-本人对强类型语言有一定的掌控能力写一些后台接口问题不大，因为之前的工作使我对 ASP.NET & NODE有一定的熟练度。
+之前的工作主要主要从事前端工作，但是对后台也是有所涉及的个人对C# ASP.NET 有一定的熟练度，对NODE也有一定的了解，对NODE的主流框架谈不上了解 ，但是脚本还是写了不少的因为工作中承担了大多数的前端自动化逻辑。如果工作中涉及后台的话我还是很乐于见到这种情况的。
 
 ## 工作经验
 
@@ -50,6 +50,8 @@ knockout jquery jqueryui requirejs C#
 ### Docave（2017年7月--）
 公司产品就像SharePoint的大插件一样帮助用户简单的操作复杂的SharePoint
 > **涉及技术** jquery jqueryUI react gulp webpack asp.net babel eslint node
+
+> **工作内容**
 - 构建项目的前端自动化工作流（编译jsx 语法检查等）
 - 提供Docave的样式架构骨架
 - 解决部分公共问题
