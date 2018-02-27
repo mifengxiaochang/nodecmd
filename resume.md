@@ -1,9 +1,19 @@
 # 简历
-
+- 姓名：李卓
+- 电话：18504411849
+- 邮箱：1012515183@qq.com
+- 学历：本科
+- 籍贯：吉林省吉林市
+- 出生日期：1993 11 29
 ## 教育经历
-2011 -1215 吉林大学
+
+2011-2015 软件工程 本科 吉林大学
 
 ## 求职意向
+
+**前端工程师** 
+
+本人对强类型语言有一定的掌控能力写一些后台接口问题不大，因为之前的工作使我对 ASP.NET & NODE有一定的熟练度。
 
 ## 工作经验
 
@@ -20,14 +30,14 @@ knockout jquery jqueryui requirejs C#
 - 随着学习是深入和技能的成长开始负责团队中的难点和一些组件的二次封装提供公共解决方案
 ### 加入GUI(2016年3月--)
 简单解释一下GUI部门的职责
-- 开发一套js 控件库供公司内部使用(类似 jQueryUI kendoUI)时间上我们是以jQueryUI 为基础的
+- 开发一套js 控件库供公司内部使用(类似 jQueryUI kendoUI)实际上我们是以jQueryUI 为基础的
 - 发布维护DEMO 站点
 - 发布维护各个版本的控件
 - 还会为项目提供一个类似于bootstrap 的样式架构（或者说就是高度定制的bootstrap）
 - 构建jquery ui 控件为基础的控件库此同时提供其他MVVM框架的壳子，提供了 ko angular react的壳子
 ### RP(2016年7月-2017年7月)
 新加坡大学(republic polytechnic)在线教学管理系统
-> **涉及技术** jquery jqueryui angularjs asp.net gulp node
+> **涉及技术** jquery jqueryui angularjs asp.net gulp node kendo editor
 
 > **工作内容**
 - 完成部分 js 控件的开发并提供angular 封装
@@ -35,12 +45,12 @@ knockout jquery jqueryui requirejs C#
 - 维护 js 和css 的打包逻辑 
 - 回答和解决项目的业务逻辑开发者遇见的控件问题和样式架构问题，或者其他跟前端沾边的问题
 - 为项目提供一些公共解决方案，解决部分难点。
-- 维护本部门的DEMO 站点
+- 维护本部门的DEMO站点(ASP.NET 和NODE 俩种站点，不过DMEO站点就是静态站点也谈不上什么技术)
 
 ### Docave（2017年7月--）
 公司产品就像SharePoint的大插件一样帮助用户简单的操作复杂的SharePoint
-> **涉及技术** jquery jqueryUI react gulp webpack asp.net babel eslint
-- 构建项目的前端自动化工具流（编译jsx 语法检查等）
+> **涉及技术** jquery jqueryUI react gulp webpack asp.net babel eslint node
+- 构建项目的前端自动化工作流（编译jsx 语法检查等）
 - 提供Docave的样式架构骨架
 - 解决部分公共问题
 - 完成部分业务逻辑
